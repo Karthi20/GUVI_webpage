@@ -1,0 +1,78 @@
+<html>
+   <head>
+      <meta content = "text/html; charset = ISO-8859-1" http-equiv = "content-type">
+		
+      <script type = "application/javascript">
+         function loadJSON(){
+            var data_file = "zs.json";
+            var http_request = new XMLHttpRequest();
+            try{
+               // Opera 8.0+, Firefox, Chrome, Safari
+               http_request = new XMLHttpRequest();
+            }catch (e){
+               // Internet Explorer Browsers
+               try{
+                  http_request = new ActiveXObject("Msxml2.XMLHTTP");
+					
+               }catch (e) {
+				
+                  try{
+                     http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                  }catch (e){
+                     // Something went wrong
+                     alert("Your browser broke!");
+                     return false;
+                  }
+					
+               }
+            }
+			
+            http_request.onreadystatechange = function(){
+			
+               if (http_request.readyState == 4  ){
+                  // Javascript function JSON.parse to parse JSON data
+                  var jsonObj = JSON.parse(http_request.responseText);
+
+                  // jsonObj variable now contains the data structure and can
+                  // be accessed as jsonObj.name and jsonObj.country.
+                  for(i=0;i<jsonObj.length;i++){
+                  document.getElementById("pid").append(innerHTML = jsonObj[i]);
+                  document.getElementById("pid").append(" ");
+                  if(i%2==0){
+                  var thep = document.getElementById("pid");
+                thep.appendChild(document.createElement("br"));
+                  }
+                  }
+               }
+            }
+			
+            http_request.open("GET", data_file, true);
+            http_request.send();
+         }
+		
+      </script>
+	
+      <title>Users Signed -IN </title>
+   </head>
+	
+   <body background="https://images.wallpaperscraft.com/image/light_faded_background_85547_1600x1200.jpg">
+      <h1 align="center">Signed-in successfully: </h1>
+		
+      <p id="pid"></p>
+<br><br><br><br><br>
+<div align="center">
+Following button fetches the data from JSON file.</div>
+<br>
+<br>
+      <div class = "central" align="center">
+         <button type = "button" onclick = "loadJSON()">Click to show Registered users</button>
+      </div>
+		<br>
+		<br>
+		
+		<div align="center">
+		<button type="button"><a href = "index.html">Sign out</a></button>
+		</div>
+   </body>
+		
+</html>
